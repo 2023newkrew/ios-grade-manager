@@ -44,7 +44,8 @@ class GradeManager {
                 let input = receiveInput(message: .inputStudent)
                 addStudent(of: input)
             case .deleteStudent:
-                break
+                let input = receiveInput(message: .deleteStudent)
+                deleteStudent(of: input)
             case .addScore:
                 break
             case .deleteScore:
@@ -69,7 +70,14 @@ class GradeManager {
         }
     }
     
-    func isValid(name: String) -> Bool {
+    func deleteStudent(of name: String) {
+        if isExisting(name: name) {
+            self.students[name] = nil
+        } else {
+            print(template: .notExistStudent(name: name))
+        }
+    }
+    
     func isExisting(name: String) -> Bool {
         guard let _ = self.students[name] else {
             return false
