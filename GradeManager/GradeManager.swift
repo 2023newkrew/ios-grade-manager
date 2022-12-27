@@ -18,7 +18,15 @@ class GradeManager {
         case error = ""
     }
     
-
+    enum Errors: Error {
+        
+        case duplicatedStudent
+        
+    }
+    
+    var students: [String: Student] = [:]
+    
+    
     func menu(command: String) -> MenuType? {
         return MenuType(rawValue: command)
     }
@@ -49,6 +57,22 @@ class GradeManager {
                 print(template: .wrongMenu)
             }
         }
+    }
+    
+    func addStudent(of name: String) {
+        if isValid(name: name) {
+            let student = Student(name: name)
+            self.students[name] = student
+        } else {
+            print(template: .duplicatedStudent(name: name))
+        }
+    }
+    
+    func isValid(name: String) -> Bool {
+        guard let _ = self.students[name] else {
+            return true
+        }
+        return false
     }
     
     
