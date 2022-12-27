@@ -22,16 +22,8 @@ extension InputError: LocalizedError {
     }
 }
 
-struct GradeManager {
-    enum InfoMessage: String {
-        case guide = "원하는 기능을 입력해주세요\n1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료"
-        
-        func printing() {
-            print(self.rawValue)
-        }
-    }
-    
-    func menuChoice() -> Result<String, InputError> {
+struct InputManager {
+    func choiceMenu() -> Result<String, InputError> {
         guard let choice = readLine() else {
             return .failure(.null)
         }
@@ -41,6 +33,41 @@ struct GradeManager {
             return .success(choice)
         default:
             return .failure(.wrong)
+        }
+    }
+}
+
+struct GradeManager {
+    let inputManager = InputManager()
+    
+    enum InfoMessage: String {
+        case guide = "원하는 기능을 입력해주세요\n1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료"
+        
+        func printing() {
+            print(self.rawValue)
+        }
+    }
+    
+    func menuChoice() -> String? {
+        let input = inputManager.choiceMenu()
+        switch input {
+        case .success(let data):
+            return data
+        case .failure(let error):
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func run() {
+        while true {
+            InfoMessage.guide.printing()
+            guard let menu = menuChoice() else {
+                continue
+            }
+            if menu == "X" {
+                break
+            }
         }
     }
 }
