@@ -40,6 +40,6 @@ enum MessageTemplate: CustomStringConvertible {
     }
 }
 
-func print(template: MessageTemplate){
+func print(template: MessageTemplate) {
     print(template)
 }

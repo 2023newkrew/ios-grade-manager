@@ -8,32 +8,10 @@
 import Foundation
 
 class GradeManager {
-    enum MenuType: String {
-        case addStudent = "1"
-        case deleteStudent = "2"
-        case addScore = "3"
-        case deleteScore = "4"
-        case fetchScore = "5"
-        case exitMenu = "x"
-        case error = ""
-    }
-    
-    enum Errors: Error {
-        
-        case duplicatedStudent
-        
-    }
-    
     var students: [String: Student] = [:]
-    
     
     func menu(command: String) -> MenuType? {
         return MenuType(rawValue: command)
-    }
-    
-    private func receiveInput(message: MessageTemplate) -> String {
-        print(message)
-        return readLine() ?? ""
     }
     
     func run() {
@@ -83,5 +61,22 @@ class GradeManager {
             return false
         }
         return true
+    }
+    
+    private func receiveInput(message: MessageTemplate) -> String {
+        print(message)
+        return readLine() ?? ""
+    }
+}
+
+extension GradeManager {
+    enum MenuType: String {
+        case addStudent = "1"
+        case deleteStudent = "2"
+        case addScore = "3"
+        case deleteScore = "4"
+        case fetchScore = "5"
+        case exitMenu = "x"
+        case error = ""
     }
 }
