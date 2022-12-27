@@ -21,7 +21,7 @@ final class GradeManagerTests: XCTestCase {
         XCTAssertEqual(result, nil)
     }
     
-    func test_중복_학생_입력_시_오류() {
+    func test_중복_학생_입력_시_true_반환() {
         //given
         let input = "dupStudent"
         
@@ -33,17 +33,38 @@ final class GradeManagerTests: XCTestCase {
         XCTAssertEqual(result, true)
     }
     
-    func test_미중복_학생_입력_시_통과() {
+    func test_학생_정상_추가_시_학생수_증가() {
         //given
-        let input = "Student"
+        let student1 = "Forest"
+        let student2 = "John"
+        sut.addStudent(of: student1)
+        sut.addStudent(of: student2)
         let currentStudentCount = sut.students.count
         
         //when
+        let input = "Volga"
         sut.addStudent(of: input)
         
         //then
         let result = sut.students.count
         XCTAssertEqual(result, currentStudentCount + 1)
+    }
+    
+    func test_학생_중복_추가_시_학생수_유지() {
+        //given
+        let student1 = "Forest"
+        let student2 = "John"
+        sut.addStudent(of: student1)
+        sut.addStudent(of: student2)
+        let currentStudentCount = sut.students.count
+        
+        //when
+        let input = "Forest"
+        sut.addStudent(of: input)
+        
+        //then
+        let result = sut.students.count
+        XCTAssertEqual(result, currentStudentCount)
     }
     
     func test_학생_삭제_시_학생수_감소() {
