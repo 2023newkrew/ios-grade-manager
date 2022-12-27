@@ -40,20 +40,20 @@ class GradeManager {
     }
     
     func addStudent(of name: String) {
-        if !isExisting(name: name) {
-            let student = Student(name: name)
-            self.students[name] = student
-        } else {
+        if isExisting(name: name) {
             print(template: .duplicatedStudent(name: name))
+            return
         }
+        let student = Student(name: name)
+        self.students[name] = student
     }
     
     func deleteStudent(of name: String) {
-        if isExisting(name: name) {
-            self.students[name] = nil
-        } else {
+        guard isExisting(name: name) else {
             print(template: .notExistStudent(name: name))
+            return
         }
+        self.students[name] = nil
     }
     
     func isExisting(name: String) -> Bool {
