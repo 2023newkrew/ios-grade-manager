@@ -45,4 +45,36 @@ final class GradeManagerTests: XCTestCase {
         let result = sut.students.count
         XCTAssertEqual(result, currentStudentCount + 1)
     }
+    
+    func test_학생_삭제_시_학생수_감소() {
+        //given
+        let input1 = "Forest"
+        let input2 = "John"
+        sut.addStudent(of: input1)
+        sut.addStudent(of: input2)
+        let currentStudentCount = sut.students.count
+        
+        //when
+        sut.deleteStudent(of: "Forest")
+        
+        //then
+        let result = sut.students.count
+        XCTAssertEqual(result, currentStudentCount - 1)
+    }
+    
+    func test_학생_삭제_실패시_학생수_유지() {
+        //given
+        let input1 = "Forest"
+        let input2 = "John"
+        sut.addStudent(of: input1)
+        sut.addStudent(of: input2)
+        let currentStudentCount = sut.students.count
+        
+        //when
+        sut.deleteStudent(of: "Volga")
+        
+        //then
+        let result = sut.students.count
+        XCTAssertEqual(result, currentStudentCount)
+    }
 }
