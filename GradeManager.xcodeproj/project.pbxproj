@@ -13,6 +13,8 @@
 		C27533F8295ACA33005F5868 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27533F7295ACA33005F5868 /* Student.swift */; };
 		C7912FBE277479C20027600C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7912FBD277479C20027600C /* main.swift */; };
 		D764BA02295AC3BA007DDD23 /* MessageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D764BA01295AC3BA007DDD23 /* MessageTemplate.swift */; };
+		D766FF77295AD1BB0083BC41 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27533F7295ACA33005F5868 /* Student.swift */; };
+		D766FF78295AD1BE0083BC41 /* MessageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D764BA01295AC3BA007DDD23 /* MessageTemplate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -182,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C27533EC295A8017005F5868 /* GradeManagerTests.swift in Sources */,
+				D766FF78295AD1BE0083BC41 /* MessageTemplate.swift in Sources */,
+				D766FF77295AD1BB0083BC41 /* Student.swift in Sources */,
 				C27533F4295AC057005F5868 /* GradeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
