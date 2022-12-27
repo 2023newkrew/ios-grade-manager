@@ -41,7 +41,8 @@ class GradeManager {
         .menu(command: receiveInput(message: .selectMenu)) {
             switch menu {
             case .addStudent:
-                break
+                let input = receiveInput(message: .inputStudent)
+                addStudent(of: input)
             case .deleteStudent:
                 break
             case .addScore:
