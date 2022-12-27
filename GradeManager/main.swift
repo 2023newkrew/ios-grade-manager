@@ -37,8 +37,38 @@ struct InputManager {
     }
 }
 
+protocol StudentManager {
+    func add()
+    func delete()
+}
+
+struct Student: Hashable {
+    var name: String
+    
+    static func == (lhs: Student, rhs: Student) -> Bool {
+        return lhs.name == rhs.name
+    }
+}
+
+struct DefaultStudentManager: StudentManager {
+    private var list = Set<Student>()
+    
+    func isDuplicate(name: String) -> Bool {
+        
+    }
+    
+    func add() {
+        
+    }
+    
+    func delete() {
+        
+    }
+}
+
 struct GradeManager {
     let inputManager = InputManager()
+    private let studentManager: StudentManager? = DefaultStudentManager()
     
     enum InfoMessage: String {
         case guide = "원하는 기능을 입력해주세요\n1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료"
@@ -59,6 +89,17 @@ struct GradeManager {
         }
     }
     
+    func operate(menu: String) {
+        switch menu {
+        case "1":
+            
+        case "2":
+            
+        default:
+            break
+        }
+    }
+    
     func run() {
         while true {
             InfoMessage.guide.printing()
@@ -68,6 +109,7 @@ struct GradeManager {
             if menu == "X" {
                 break
             }
+            operate(menu: menu)
         }
     }
 }
