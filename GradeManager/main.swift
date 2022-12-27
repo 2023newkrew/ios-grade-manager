@@ -21,3 +21,26 @@ extension InputError: LocalizedError {
         }
     }
 }
+
+struct GradeManager {
+    enum InfoMessage: String {
+        case guide = "원하는 기능을 입력해주세요\n1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료"
+        
+        func printing() {
+            print(self.rawValue)
+        }
+    }
+    
+    func menuChoice() -> Result<String, InputError> {
+        guard let choice = readLine() else {
+            return .failure(.null)
+        }
+        
+        switch choice {
+        case "1", "2", "3", "4", "5", "X":
+            return .success(choice)
+        default:
+            return .failure(.wrong)
+        }
+    }
+}
