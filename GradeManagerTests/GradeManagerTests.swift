@@ -29,8 +29,8 @@ final class GradeManagerTests: XCTestCase {
         sut.addStudent(of: input)
         
         //then
-        let result = sut.isValid(name: input)
-        XCTAssertEqual(result, false)
+        let result = sut.isExisting(name: input)
+        XCTAssertEqual(result, true)
     }
     
     func test_미중복_학생_입력_시_통과() {

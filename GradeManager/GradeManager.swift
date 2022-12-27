@@ -61,7 +61,7 @@ class GradeManager {
     }
     
     func addStudent(of name: String) {
-        if isValid(name: name) {
+        if !isExisting(name: name) {
             let student = Student(name: name)
             self.students[name] = student
         } else {
@@ -70,11 +70,10 @@ class GradeManager {
     }
     
     func isValid(name: String) -> Bool {
+    func isExisting(name: String) -> Bool {
         guard let _ = self.students[name] else {
-            return true
+            return false
         }
-        return false
+        return true
     }
-    
-    
 }
