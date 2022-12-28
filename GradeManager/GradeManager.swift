@@ -10,20 +10,20 @@ import Foundation
 class GradeManager {
     var students: [String: Student] = [:]
     
-    func menu(command: String) -> MenuType? {
-        return MenuType(rawValue: command)
+    func menu(command: String) -> MenuType {
+        return MenuType(rawValue: command) ?? .error
     }
     
     func run() {
-    menuLoop: while let menu = self
-        .menu(command: receiveInput(message: .selectMenu)) {
+    menuLoop: while let input = receiveInput(message: .selectMenu) {
+            let menu = self.menu(command: input)
             switch menu {
             case .addStudent:
-                let input = receiveInput(message: .inputStudent)
-                addStudent(of: input)
+                let name = receiveInput(message: .inputStudent)
+                addStudent(of: name)
             case .deleteStudent:
-                let input = receiveInput(message: .deleteStudent)
-                deleteStudent(of: input)
+                let name = receiveInput(message: .deleteStudent)
+                deleteStudent(of: name)
             case .addScore:
                 break
             case .deleteScore:
@@ -39,7 +39,11 @@ class GradeManager {
         }
     }
     
-    func addStudent(of name: String) {
+    func addStudent(of name: String?) {
+        guard let name else {
+            return
+        }
+        
         if isExisting(name: name) {
             print(template: .duplicatedStudent(name: name))
             return
@@ -48,7 +52,11 @@ class GradeManager {
         self.students[name] = student
     }
     
-    func deleteStudent(of name: String) {
+    func deleteStudent(of name: String?) {
+        guard let name else {
+            return
+        }
+        
         guard isExisting(name: name) else {
             print(template: .notExistStudent(name: name))
             return
@@ -63,9 +71,9 @@ class GradeManager {
         return true
     }
     
-    private func receiveInput(message: MessageTemplate) -> String {
+    private func receiveInput(message: MessageTemplate) -> String? {
         print(message)
-        return readLine() ?? ""
+        return readLine()
     }
 }
 
