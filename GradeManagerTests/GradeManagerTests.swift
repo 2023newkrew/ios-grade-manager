@@ -18,7 +18,7 @@ final class GradeManagerTests: XCTestCase {
         let result = sut.menu(command: input)
         
         //then
-        XCTAssertEqual(result, nil)
+        XCTAssertEqual(result, .error)
     }
     
     func test_중복_학생_입력_시_true_반환() {
