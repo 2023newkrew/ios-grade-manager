@@ -12,73 +12,55 @@ class UnitTestGradeManager: XCTestCase {
     let sut = GradeManager()
     
     func test_input_menu_1() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "1")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "1")
     }
     
     func test_input_menu_2() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "2")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "2")
     }
     
     func test_input_menu_3() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "3")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "3")
     }
     
     func test_input_menu_4() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "4")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "4")
     }
     
     func test_input_menu_5() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "5")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "5")
     }
     
     func test_input_menu_X() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success(let data):
-            XCTAssertEqual(data, "X")
-        case .failure:
+        guard let result = sut.menuChoice() else {
             XCTFail()
+            return
         }
+        XCTAssertEqual(result, "X")
     }
     
     func test_input_menu_error() {
-        let result = sut.menuChoice()
-        switch result {
-        case .success:
-            XCTFail()
-        case .failure:
-            XCTAssert(true)
-        }
+        XCTAssertNil(sut.menuChoice())
     }
 
     override func setUpWithError() throws {
