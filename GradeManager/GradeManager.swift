@@ -20,10 +20,10 @@ class GradeManager {
             switch menu {
             case .addStudent:
                 let name = self.receiveInput(message: .inputStudent)
-                addStudent(of: name)
+                self.addStudent(of: name)
             case .deleteStudent:
                 let name = self.receiveInput(message: .deleteStudent)
-                deleteStudent(of: name)
+                self.deleteStudent(of: name)
             case .addScore:
                 break
             case .deleteScore:
@@ -45,12 +45,12 @@ class GradeManager {
             return
         }
         
-        if !isValid(studentName: name) {
+        if !self.isValid(studentName: name) {
             print(template: .invalidStudentName)
             return
         }
         
-        if isExisting(name: name) {
+        if self.isExisting(name: name) {
             print(template: .duplicatedStudent(name: name))
             return
         }
@@ -64,12 +64,12 @@ class GradeManager {
             return
         }
         
-        if !isValid(studentName: name) {
+        if !self.isValid(studentName: name) {
             print(template: .invalidStudentName)
             return
         }
         
-        guard isExisting(name: name) else {
+        guard self.isExisting(name: name) else {
             print(template: .notExistStudent(name: name))
             return
         }
