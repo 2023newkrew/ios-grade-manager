@@ -11,6 +11,7 @@ enum MessageTemplate: CustomStringConvertible {
     case selectMenu
     case wrongMenu
     case inputStudent
+    case invalidStudentName
     case duplicatedStudent(name: String)
     case deleteStudent
     case notExistStudent(name: String)
@@ -28,6 +29,8 @@ enum MessageTemplate: CustomStringConvertible {
             return "뭔가 입력이 잘못되었습니다. 1~5 사이의 숫자 혹은 X를 입력해주세요"
         case .inputStudent:
             return "추가할 학생의 이름을 입력해주세요"
+        case .invalidStudentName:
+            return "입력이 잘못되었습니다. 다시 확인해주세요."
         case .duplicatedStudent(let name):
             return "\(name)은 이미 존재하는 학생입니다. 추가하지 않습니다."
         case .deleteStudent:

@@ -37,10 +37,16 @@ class GradeManager {
                 print(template: .wrongMenu)
             }
         }
+        
     }
     
     func addStudent(of name: String?) {
         guard let name else {
+            return
+        }
+        
+        if !isValid(studentName: name) {
+            print(template: .invalidStudentName)
             return
         }
         
@@ -57,11 +63,19 @@ class GradeManager {
             return
         }
         
+        if !isValid(studentName: name) {
+            print(template: .invalidStudentName)
+            return
+        }
+        
         guard isExisting(name: name) else {
             print(template: .notExistStudent(name: name))
             return
         }
         self.students[name] = nil
+    
+    func isValid(studentName: String) -> Bool {
+        return !studentName.isEmpty
     }
     
     func isExisting(name: String) -> Bool {
