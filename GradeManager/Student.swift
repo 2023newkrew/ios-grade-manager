@@ -12,10 +12,10 @@ struct Student {
     private(set) var scores: [String: Grade] = [:]
     
     mutating func addScore(subject: String, grade: Grade) {
-        scores[subject] = grade
+        self.scores[subject] = grade
     }
     
     mutating func deleteScore(subject: String) {
-        
+        self.scores[subject] = nil
     }
 }
