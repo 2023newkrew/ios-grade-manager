@@ -32,6 +32,13 @@ enum Menu: String {
 }
 
 struct InputManager {
+    func viewAverageScore() -> Result<String, InputError> {
+        guard let studentName = readLine() else {
+            return .failure(.invalidUserInput)
+        }
+        return .success(studentName)
+    }
+    
     func addStudentGradeInfo() -> Result<(name: String, subject: String, grade: String), InputError> {
         guard let gradeInfo = readLine() else {
             return .failure(.invalidUserInput)
@@ -87,6 +94,7 @@ protocol StudentManager {
     mutating func deleteStudent(name: String)
     mutating func addOrChangeGrade(name: String, subject: String, grade: String)
     mutating func deleteGrade(name: String, subject: String)
+    func viewAverageScore(name: String)
 }
 
 class Student: Hashable {
@@ -116,6 +124,9 @@ class Student: Hashable {
     
     func deleteGrade(subject: String) {
         courseManager.delete(name: name, subject: subject)
+    }
+    
+    func showAverageScore() {        courseManager.showAverageScore()
     }
 }
 
@@ -197,6 +208,18 @@ struct CourseManager {
         list[subject] = nil
         InfoMessage.deleteGrade.printing(name: name, subject: subject)
     }
+    
+    func averageScore() -> Double {
+        return list.map { $0.value.score }.reduce(0, +) / Double(list.count)
+    }
+    
+    func showAverageScore() {
+        print(list.count)
+        list.forEach { (subject, grade) in
+            print("\(subject): \(grade.score)")
+        }
+        print("평점 : \(averageScore())")
+    }
 }
 
 struct DefaultStudentManager: StudentManager {
@@ -234,6 +257,19 @@ struct DefaultStudentManager: StudentManager {
             }
         }
         return nil
+    }
+    
+    func viewAverageScore(name: String) {
+        guard isExist(name: name) else {
+            InfoMessage.canNotFindStudent.printing(name: name)
+            return
+        }
+        for student in list {
+            if student == name {
+                student.showAverageScore()
+                return
+            }
+        }
     }
     
     mutating func addStudent(name: String) {
@@ -291,6 +327,7 @@ struct GradeManager {
         case requireStudentNameToDelete = "삭제할 학생의 이름을 입력해주세요"
         case requireStudentGradeToAddOrChange = "성적을 추가할 학생의 이름, 과목 이름, 성적(A+, A0, F등)을 띄어쓰기로 구분하여 차례로 작성해주세요.\n입력예) Mickey Swift A+"
         case requireStudentGradeToDelete = "성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요."
+        case requireStudentWhoWantKnowScore = "평점을 알고싶은 학생의 이름을 입력해주세요."
         case exit = "프로그램을 종료합니다..."
         
         func printing() {
@@ -357,6 +394,17 @@ struct GradeManager {
         
     }
     
+    func viewAverageScore() {
+        InfoMessage.requireStudentWhoWantKnowScore.printing()
+        let studentName = inputManager.viewAverageScore()
+        switch studentName {
+        case .success(let name):
+            studentManager.viewAverageScore(name: name)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+    
     mutating private func operate(menu: Menu) {
         switch menu {
         case  .addStudent:
@@ -367,6 +415,8 @@ struct GradeManager {
             addOrChangeGrade()
         case .deleteGrade:
             deleteGrade()
+        case .viewAverageScore:
+            viewAverageScore()
         default:
             break
         }
