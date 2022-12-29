@@ -82,12 +82,7 @@ struct DefaultStudentManager: StudentManager {
     private var list = Set<Student>()
     
     func isDuplicate(name: String) -> Bool {
-        for student in list {
-            if student == name {
-                return true
-            }
-        }
-        return false
+        return list.contains(Student(name: name))
     }
     
     func deleteTarget(name: String) -> Student? {
