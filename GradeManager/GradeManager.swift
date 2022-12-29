@@ -28,7 +28,8 @@ class GradeManager {
             let scoreFormat = self.receiveInput(message: .inputScore)
             self.addScore(format: scoreFormat)
         case .deleteScore:
-            break
+            let scoreFormat = self.receiveInput(message: .deleteScore)
+            self.deleteScore(format: scoreFormat)
         case .fetchScore:
             break
         case .exitMenu:
@@ -38,7 +39,6 @@ class GradeManager {
             print(template: .wrongMenu)
         }
     }
-        
     }
     
     func addStudent(of name: String?) {
@@ -80,7 +80,7 @@ class GradeManager {
     
     func addScore(format scoreFormat: String?) {
         guard let scoreFormat,
-        let (name, subject, grade) = scoreCompents(of: scoreFormat)
+        let (name, subject, grade) = scoreAddComponents(of: scoreFormat)
         else {
             print(template: .invalidInput)
             return
@@ -92,15 +92,38 @@ class GradeManager {
         }
         
         student.addScore(subject: subject, grade: grade)
-        students[name] = student
-        print(template: .updateScore(name: name, subject: subject, grade: grade))
+        self.students[name] = student
+        print(template: .completeAddScore(name: name, subject: subject, grade: grade))
+    }
+    
+    func deleteScore(format scoreFormat: String?) {
+        guard let scoreFormat,
+        let (name, subject) = scoreDeleteComponents(of: scoreFormat)
+        else {
+            print(template: .invalidInput)
+            return
+        }
+        
+        guard var student = students[name] else {
+            print(template: .notExistStudent(name: name))
+            return
+        }
+        
+        guard student.scores[subject] != nil else {
+            print(template: .notFoundSubject)
+            return
+        }
+        
+        student.deleteScore(subject: subject)
+        self.students[name] = student
+        print(template: .completeDeleteScore(name: name, subject: subject))
     }
     
     private func isValid(studentName: String) -> Bool {
         return !studentName.isEmpty
     }
     
-    private func scoreCompents(of scoreFormat: String)
+    private func scoreAddComponents(of scoreFormat: String)
     -> (name: String, subject: String, grade: Grade)? {
         let scoreFormatArray = scoreFormat.components(separatedBy: " ")
         
@@ -116,6 +139,20 @@ class GradeManager {
         let subject = scoreFormatArray[1]
         
         return (name, subject, grade)
+    }
+    
+    private func scoreDeleteComponents(of scoreFormat: String)
+    -> (name: String, subject: String)? {
+        let scoreFormatArray = scoreFormat.components(separatedBy: " ")
+        
+        if scoreFormatArray.count != 2 {
+            return nil
+        }
+        
+        let name = scoreFormatArray[0]
+        let subject = scoreFormatArray[1]
+        
+        return (name, subject)
     }
     
     private func isExisting(name: String) -> Bool {
