@@ -31,7 +31,8 @@ class GradeManager {
             let scoreFormat = self.receiveInput(message: .deleteScore)
             self.deleteScore(format: scoreFormat)
         case .fetchScore:
-            break
+            let name = self.receiveInput(message: .queryStudentScores)
+            self.queryStudentScores(of: name)
         case .exitMenu:
             print(template: .exitProgram)
             break menuLoop
@@ -80,7 +81,7 @@ class GradeManager {
     
     func addScore(format scoreFormat: String?) {
         guard let scoreFormat,
-        let (name, subject, grade) = scoreAddComponents(of: scoreFormat)
+              let (name, subject, grade) = scoreAddComponents(of: scoreFormat)
         else {
             print(template: .invalidInput)
             return
@@ -98,7 +99,7 @@ class GradeManager {
     
     func deleteScore(format scoreFormat: String?) {
         guard let scoreFormat,
-        let (name, subject) = scoreDeleteComponents(of: scoreFormat)
+              let (name, subject) = scoreDeleteComponents(of: scoreFormat)
         else {
             print(template: .invalidInput)
             return
@@ -117,6 +118,36 @@ class GradeManager {
         student.deleteScore(subject: subject)
         self.students[name] = student
         print(template: .completeDeleteScore(name: name, subject: subject))
+    }
+    
+    func queryStudentScores(of name: String?) {
+        guard let name else {
+            return
+        }
+        
+        if !self.isValid(studentName: name) {
+            print(template: .invalidInput)
+            return
+        }
+        
+        guard let student = students[name] else {
+            print(template: .notExistStudent(name: name))
+            return
+        }
+        
+        if student.scores.count == 0 {
+            print(template: .emptyScores)
+            return
+        }
+        
+        let average = student.scores
+            .values
+            .map { $0.score / Double(student.scores.count) }
+            .reduce(0.0, +)
+
+        let roundedAverage = round(average * 100) / 100.0
+        print(template: .studentStatus(scores: student.scores))
+        print(template: .studentAverageScore(roundedAverage.description))
     }
     
     private func isValid(studentName: String) -> Bool {
