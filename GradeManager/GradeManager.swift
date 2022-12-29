@@ -8,7 +8,7 @@
 import Foundation
 
 class GradeManager {
-    var students: [String: Student] = [:]
+    private(set) var students: [String: Student] = [:]
     
     func menu(command: String) -> MenuType {
         return MenuType(rawValue: command) ?? .error
@@ -77,11 +77,11 @@ class GradeManager {
         print(template: .completeDeleteStudent(name: name))
     }
     
-    func isValid(studentName: String) -> Bool {
+    private func isValid(studentName: String) -> Bool {
         return !studentName.isEmpty
     }
     
-    func isExisting(name: String) -> Bool {
+    private func isExisting(name: String) -> Bool {
         guard let _ = self.students[name] else {
             return false
         }

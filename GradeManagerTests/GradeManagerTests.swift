@@ -20,19 +20,7 @@ final class GradeManagerTests: XCTestCase {
         //then
         XCTAssertEqual(result, .error)
     }
-    
-    func test_중복_학생_입력_시_true_반환() {
-        //given
-        let input = "dupStudent"
-        
-        //when
-        sut.addStudent(of: input)
-        
-        //then
-        let result = sut.isExisting(name: input)
-        XCTAssertEqual(result, true)
-    }
-    
+
     func test_학생_정상_추가_시_학생수_증가() {
         //given
         let student1 = "Forest"
