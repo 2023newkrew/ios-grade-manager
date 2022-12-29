@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C23B13D8295A8DBF008E73D9 /* UnitTestGradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */; };
 		C23B13DC295A8E02008E73D9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7912FBD277479C20027600C /* main.swift */; };
+		C281AC2F295D56F40083B990 /* UnitTestSutdentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */; };
 		C7912FBE277479C20027600C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7912FBD277479C20027600C /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		C23B13D5295A8DBF008E73D9 /* UnitTestGradeManager.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestGradeManager.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestGradeManager.swift; sourceTree = "<group>"; };
+		C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestSutdentManager.swift; sourceTree = "<group>"; };
 		C7912FBA277479C20027600C /* GradeManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GradeManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7912FBD277479C20027600C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */,
+				C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */,
 			);
 			path = UnitTestGradeManager;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			files = (
 				C23B13DC295A8E02008E73D9 /* main.swift in Sources */,
 				C23B13D8295A8DBF008E73D9 /* UnitTestGradeManager.swift in Sources */,
+				C281AC2F295D56F40083B990 /* UnitTestSutdentManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
