@@ -15,14 +15,14 @@ class GradeManager {
     }
     
     func run() {
-    menuLoop: while let input = receiveInput(message: .selectMenu) {
+    menuLoop: while let input = self.receiveInput(message: .selectMenu) {
             let menu = self.menu(command: input)
             switch menu {
             case .addStudent:
-                let name = receiveInput(message: .inputStudent)
+                let name = self.receiveInput(message: .inputStudent)
                 addStudent(of: name)
             case .deleteStudent:
-                let name = receiveInput(message: .deleteStudent)
+                let name = self.receiveInput(message: .deleteStudent)
                 deleteStudent(of: name)
             case .addScore:
                 break
@@ -56,6 +56,7 @@ class GradeManager {
         }
         let student = Student(name: name)
         self.students[name] = student
+        print(template: .completeAddStudent(name: name))
     }
     
     func deleteStudent(of name: String?) {
@@ -73,6 +74,8 @@ class GradeManager {
             return
         }
         self.students[name] = nil
+        print(template: .completeDeleteStudent(name: name))
+    }
     
     func isValid(studentName: String) -> Bool {
         return !studentName.isEmpty

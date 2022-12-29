@@ -13,8 +13,10 @@ enum MessageTemplate: CustomStringConvertible {
     case inputStudent
     case invalidStudentName
     case duplicatedStudent(name: String)
+    case completeAddStudent(name: String)
     case deleteStudent
     case notExistStudent(name: String)
+    case completeDeleteStudent(name: String)
     case exitProgram
     
     var description: String {
@@ -33,10 +35,14 @@ enum MessageTemplate: CustomStringConvertible {
             return "입력이 잘못되었습니다. 다시 확인해주세요."
         case .duplicatedStudent(let name):
             return "\(name)은 이미 존재하는 학생입니다. 추가하지 않습니다."
+        case .completeAddStudent(let name):
+            return "\(name) 학생을 추가했습니다."
         case .deleteStudent:
             return "삭제할 학생의 이름을 입력해주세요"
         case .notExistStudent(let name):
-            return "\(name)학생을 찾지 못했습니다."
+            return "\(name) 학생을 찾지 못했습니다."
+        case .completeDeleteStudent(let name):
+            return "\(name) 학생을 삭제하였습니다."
         case .exitProgram:
             return "프로그램을 종료합니다..."
         }
