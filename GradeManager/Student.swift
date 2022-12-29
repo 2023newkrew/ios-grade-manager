@@ -9,4 +9,5 @@ import Foundation
 
 struct Student {
     let name: String
+    private(set) var scores: [String: Grade] = [:]
 }
