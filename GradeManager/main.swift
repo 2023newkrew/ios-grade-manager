@@ -173,13 +173,16 @@ struct GradeManager {
     }
     
     mutating func run() {
-        while true {
+        var canOperate: Bool = true
+        while canOperate {
             InfoMessage.guide.printing()
             guard let menu = menuChoice() else {
                 continue
             }
+            
             if menu == .exitGradeManager {
                 InfoMessage.exit.printing()
+                canOperate = false
                 break
             }
 
