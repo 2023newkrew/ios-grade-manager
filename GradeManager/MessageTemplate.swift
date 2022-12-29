@@ -18,7 +18,10 @@ enum MessageTemplate: CustomStringConvertible {
     case notExistStudent(name: String)
     case completeDeleteStudent(name: String)
     case inputScore
-    case updateScore(name: String, subject: String, grade: Grade)
+    case deleteScore
+    case completeAddScore(name: String, subject: String, grade: Grade)
+    case completeDeleteScore(name: String, subject: String)
+    case notFoundSubject
     case exitProgram
     
     var description: String {
@@ -52,8 +55,18 @@ enum MessageTemplate: CustomStringConvertible {
         입력예) Mickey Swift A+
         만약에 학생의 성적 중 해당 과목이 존재하면 기존 점수가 갱신됩니다.
         """
-        case .updateScore(let name, let subject, let grade):
+        case .deleteScore:
+            return
+        """
+        성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요.
+        입력예) Mickey Swift
+        """
+        case .completeAddScore(let name, let subject, let grade):
             return "\(name) 학생의 \(subject) 과목이 \(grade.rawValue)로 추가(변경)되었습니다."
+        case .completeDeleteScore(let name, let subject):
+            return "\(name) 학생의 \(subject) 과목의 성적이 삭제되었습니다."
+        case .notFoundSubject:
+            return "과목명이 잘못 입력되었습니다."
         case .exitProgram:
             return "프로그램을 종료합니다..."
         }
