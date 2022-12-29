@@ -16,7 +16,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "1")
+        XCTAssertEqual(result, .addStudent)
     }
     
     func test_input_menu_2() {
@@ -24,7 +24,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "2")
+        XCTAssertEqual(result, .deleteStudent)
     }
     
     func test_input_menu_3() {
@@ -32,7 +32,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "3")
+        XCTAssertEqual(result, .addOrChangeGrade)
     }
     
     func test_input_menu_4() {
@@ -40,7 +40,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "4")
+        XCTAssertEqual(result, .deleteGrade)
     }
     
     func test_input_menu_5() {
@@ -48,7 +48,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "5")
+        XCTAssertEqual(result, .viewAverageScore)
     }
     
     func test_input_menu_X() {
@@ -56,7 +56,7 @@ class UnitTestGradeManager: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(result, "X")
+        XCTAssertEqual(result, .exitGradeManager)
     }
     
     func test_input_menu_error() {
