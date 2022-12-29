@@ -81,6 +81,10 @@ struct DefaultStudentManager: StudentManager {
     
     private var list = Set<Student>()
     
+    var numberOfStudent: Int {
+        return self.list.count
+    }
+    
     func isDuplicate(name: String) -> Bool {
         return list.contains(Student(name: name))
     }
