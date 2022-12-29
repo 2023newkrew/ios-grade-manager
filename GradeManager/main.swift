@@ -7,38 +7,38 @@
 import Foundation
 
 enum InputError: Error {
-    case null
-    case wrong
+    case invalidUserInput
 }
 
 extension InputError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .null:
-            return "입력에 문제가 있습니다. 다시 입력해주세요."
-        case .wrong:
+        case .invalidUserInput:// 바꿀 예정 invalidUserInput
             return "뭔가 입력이 잘못되었습니다. 1~5 사이의 숫자 혹은 X를 입력해주세요."
         }
     }
 }
 
+enum Menu: String {
+    case addStudent = "1"
+    case deleteStudent = "2"
+    case addOrChangeGrade = "3"
+    case deleteGrade = "4"
+    case viewAverageScore = "5"
+    case exitGradeManager = "X"
+}
+
 struct InputManager {
-    func choiceMenu() -> Result<String, InputError> {
-        guard let choice = readLine() else {
-            return .failure(.null)
+    func choiceMenu() -> Result<Menu, InputError> { // 1,2,3,4,5, X, 얘네를 제외하고 다른 문자가 들어가면
+        guard let choice = readLine(), let menu = Menu(rawValue: choice) else {
+            return .failure(.invalidUserInput)
         }
-        
-        switch choice {
-        case "1", "2", "3", "4", "5", "X":
-            return .success(choice)
-        default:
-            return .failure(.wrong)
-        }
+        return .success(menu)
     }
     
     func getStudentName() -> Result<String, InputError> {
         guard let name = readLine() else {
-            return .failure(.null)
+            return .failure(.invalidUserInput)
         }
         return .success(name)
     }
@@ -62,7 +62,7 @@ struct Student: Hashable {
 }
 
 struct DefaultStudentManager: StudentManager {
-    enum InfoMessage: String {
+    private enum InfoMessage: String {
         case addSuccess = " 학생을 추가했습니다."
         case addFailure = "입력이 잘못되었습니다. 다시 확인해주세요."
         case deleteSuccess = "학생을 삭제하였습니다."
@@ -122,7 +122,7 @@ struct GradeManager {
     let inputManager = InputManager()
     private var studentManager: StudentManager = DefaultStudentManager()
     
-    enum InfoMessage: String {
+    private enum InfoMessage: String {
         case guide = "원하는 기능을 입력해주세요\n1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료"
         case add = "추가할 학생의 이름을 입력해주세요"
         case delete = "삭제할 학생의 이름을 입력해주세요"
@@ -132,12 +132,12 @@ struct GradeManager {
             print(self.rawValue)
         }
     }
-    
-    func menuChoice() -> String? {
+        
+    func menuChoice() -> Menu? {
         let input = inputManager.choiceMenu()
         switch input {
-        case .success(let data):
-            return data
+        case .success(let menu):
+            return menu
         case .failure(let error):
             print(error.localizedDescription)
             return nil
@@ -166,11 +166,11 @@ struct GradeManager {
         }
     }
     
-    mutating func operate(menu: String) {
+    mutating private func operate(menu: Menu) {
         switch menu {
-        case "1":
+        case  .addStudent:
             addStudent()
-        case "2":
+        case .deleteStudent:
             deleteStudent()
         default:
             break
@@ -183,10 +183,11 @@ struct GradeManager {
             guard let menu = menuChoice() else {
                 continue
             }
-            if menu == "X" {
+            if menu == .exitGradeManager {
                 InfoMessage.exit.printing()
                 break
             }
+
             operate(menu: menu)
         }
     }
