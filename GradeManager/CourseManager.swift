@@ -66,6 +66,7 @@ struct CourseManager {
             }
         }
     }
+    
     private var list: [String: Grade] = [:]
     
     mutating func add(name: String, subject: String, grade: String) {
@@ -91,7 +92,6 @@ struct CourseManager {
     }
     
     func showAverageScore() {
-        print(list.count)
         list.forEach { (subject, grade) in
             print("\(subject): \(grade.score)")
         }

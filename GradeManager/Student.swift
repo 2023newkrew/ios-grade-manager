@@ -36,6 +36,7 @@ class Student: Hashable {
         courseManager.delete(name: name, subject: subject)
     }
     
-    func showAverageScore() {        courseManager.showAverageScore()
+    func showAverageScore() {
+        courseManager.showAverageScore()
     }
 }

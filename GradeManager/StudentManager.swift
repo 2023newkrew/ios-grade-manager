@@ -43,13 +43,12 @@ struct DefaultStudentManager: StudentManager {
         return list.contains(Student(name: name))
     }
     
-    func deleteTarget(name: String) -> Student? {
-        for student in list {
-            if student == name {
-                return student
-            }
+    func studentToBeDeleted(name: String) -> Student? {
+        let student = list.filter{ $0 == name }
+        if student.count == 0 {
+            return nil
         }
-        return nil
+        return Array(student)[0]
     }
     
     func viewAverageScore(name: String) {
@@ -57,12 +56,8 @@ struct DefaultStudentManager: StudentManager {
             InfoMessage.canNotFindStudent.printing(name: name)
             return
         }
-        for student in list {
-            if student == name {
-                student.showAverageScore()
-                return
-            }
-        }
+        let student = list.filter{ $0 == name }
+        Array(student)[0].showAverageScore()
     }
     
     mutating func addStudent(name: String) {
@@ -75,7 +70,7 @@ struct DefaultStudentManager: StudentManager {
     }
     
     mutating func deleteStudent(name: String) {
-        guard let deleteTargetStudent = deleteTarget(name: name) else {
+        guard let deleteTargetStudent = studentToBeDeleted(name: name) else {
             InfoMessage.canNotFindStudent.printing(name: name)
             return
         }
@@ -88,12 +83,8 @@ struct DefaultStudentManager: StudentManager {
             InfoMessage.canNotFindStudent.printing(name: name)
             return
         }
-        for student in list {
-            if student == name {
-                student.addOrChangeGrade(subject: subject, grade: grade)
-                return
-            }
-        }
+        let student = list.filter{ $0 == name }
+        Array(student)[0].addOrChangeGrade(subject: subject, grade: grade)
     }
     
     mutating func deleteGrade(name: String, subject: String) {
@@ -101,11 +92,7 @@ struct DefaultStudentManager: StudentManager {
             InfoMessage.canNotFindStudent.printing(name: name)
             return
         }
-        for student in list {
-            if student == name {
-                student.deleteGrade(subject: subject)
-                return
-            }
-        }
+        let student = list.filter{ $0 == name }
+        Array(student)[0].deleteGrade(subject: subject)
     }
 }
