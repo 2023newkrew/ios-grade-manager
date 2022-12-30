@@ -10,7 +10,16 @@
 		C23B13D8295A8DBF008E73D9 /* UnitTestGradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */; };
 		C23B13DC295A8E02008E73D9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7912FBD277479C20027600C /* main.swift */; };
 		C281AC2F295D56F40083B990 /* UnitTestSutdentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */; };
-		C281AC31295D5F870083B990 /* UnitTestGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = C281AC30295D5F870083B990 /* UnitTestGrade.swift */; };
+		C2B5B457295E82EF00DC4D99 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B456295E82EF00DC4D99 /* InputManager.swift */; };
+		C2B5B459295E833500DC4D99 /* StudentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B458295E833500DC4D99 /* StudentManager.swift */; };
+		C2B5B45B295E836300DC4D99 /* GradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45A295E836300DC4D99 /* GradeManager.swift */; };
+		C2B5B45D295E838500DC4D99 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45C295E838500DC4D99 /* CourseManager.swift */; };
+		C2B5B45F295E83BA00DC4D99 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45E295E83BA00DC4D99 /* Student.swift */; };
+		C2B5B460295E842800DC4D99 /* GradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45A295E836300DC4D99 /* GradeManager.swift */; };
+		C2B5B461295E843900DC4D99 /* StudentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B458295E833500DC4D99 /* StudentManager.swift */; };
+		C2B5B462295E843F00DC4D99 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45E295E83BA00DC4D99 /* Student.swift */; };
+		C2B5B463295E844100DC4D99 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B45C295E838500DC4D99 /* CourseManager.swift */; };
+		C2B5B464295E844700DC4D99 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5B456295E82EF00DC4D99 /* InputManager.swift */; };
 		C7912FBE277479C20027600C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7912FBD277479C20027600C /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +39,11 @@
 		C23B13D5295A8DBF008E73D9 /* UnitTestGradeManager.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestGradeManager.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestGradeManager.swift; sourceTree = "<group>"; };
 		C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestSutdentManager.swift; sourceTree = "<group>"; };
-		C281AC30295D5F870083B990 /* UnitTestGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestGrade.swift; sourceTree = "<group>"; };
+		C2B5B456295E82EF00DC4D99 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+		C2B5B458295E833500DC4D99 /* StudentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentManager.swift; sourceTree = "<group>"; };
+		C2B5B45A295E836300DC4D99 /* GradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeManager.swift; sourceTree = "<group>"; };
+		C2B5B45C295E838500DC4D99 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
+		C2B5B45E295E83BA00DC4D99 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		C7912FBA277479C20027600C /* GradeManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GradeManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7912FBD277479C20027600C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,7 +71,6 @@
 			children = (
 				C23B13D7295A8DBF008E73D9 /* UnitTestGradeManager.swift */,
 				C281AC2E295D56F40083B990 /* UnitTestSutdentManager.swift */,
-				C281AC30295D5F870083B990 /* UnitTestGrade.swift */,
 			);
 			path = UnitTestGradeManager;
 			sourceTree = "<group>";
@@ -85,6 +97,11 @@
 			isa = PBXGroup;
 			children = (
 				C7912FBD277479C20027600C /* main.swift */,
+				C2B5B456295E82EF00DC4D99 /* InputManager.swift */,
+				C2B5B458295E833500DC4D99 /* StudentManager.swift */,
+				C2B5B45A295E836300DC4D99 /* GradeManager.swift */,
+				C2B5B45C295E838500DC4D99 /* CourseManager.swift */,
+				C2B5B45E295E83BA00DC4D99 /* Student.swift */,
 			);
 			path = GradeManager;
 			sourceTree = "<group>";
@@ -179,9 +196,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23B13DC295A8E02008E73D9 /* main.swift in Sources */,
-				C281AC31295D5F870083B990 /* UnitTestGrade.swift in Sources */,
+				C2B5B461295E843900DC4D99 /* StudentManager.swift in Sources */,
+				C2B5B463295E844100DC4D99 /* CourseManager.swift in Sources */,
 				C23B13D8295A8DBF008E73D9 /* UnitTestGradeManager.swift in Sources */,
 				C281AC2F295D56F40083B990 /* UnitTestSutdentManager.swift in Sources */,
+				C2B5B464295E844700DC4D99 /* InputManager.swift in Sources */,
+				C2B5B462295E843F00DC4D99 /* Student.swift in Sources */,
+				C2B5B460295E842800DC4D99 /* GradeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +210,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2B5B457295E82EF00DC4D99 /* InputManager.swift in Sources */,
+				C2B5B45F295E83BA00DC4D99 /* Student.swift in Sources */,
+				C2B5B459295E833500DC4D99 /* StudentManager.swift in Sources */,
+				C2B5B45D295E838500DC4D99 /* CourseManager.swift in Sources */,
 				C7912FBE277479C20027600C /* main.swift in Sources */,
+				C2B5B45B295E836300DC4D99 /* GradeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

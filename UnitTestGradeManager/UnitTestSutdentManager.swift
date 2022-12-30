@@ -27,7 +27,7 @@ final class UnitTestSutdentManager: XCTestCase {
     
     func test_학생을_추가했을_경우_학생들의_수가_1_증가한다() {
         let studentCountBeforeAdd = sut.numberOfStudent
-        sut.add(name: randomStudent())
+        sut.addStudent(name: randomStudent())
         let studentCountAfterAdd = sut.numberOfStudent
         XCTAssertEqual(studentCountBeforeAdd + 1, studentCountAfterAdd)
     }
@@ -35,10 +35,10 @@ final class UnitTestSutdentManager: XCTestCase {
     func test_있는_학생을_추가했을_경우_학생들의_수가_증가_하지_않는다() {
         let studentName = randomStudent()
         
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         let studentCountBeforeAdd = sut.numberOfStudent
         
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         let studentCountAfterAdd = sut.numberOfStudent
         XCTAssertEqual(studentCountBeforeAdd, studentCountAfterAdd)
     }
@@ -46,21 +46,21 @@ final class UnitTestSutdentManager: XCTestCase {
     func test_학생을_추가했을_경우_입력한_이름이_올바르게_들어간다() {
         let studentName = randomStudent()
         
-        let isStudentExistBeforeAdd = sut.isDuplicate(name: studentName)
+        let isStudentExistBeforeAdd = sut.isExist(name: studentName)
         XCTAssertFalse(isStudentExistBeforeAdd)
         
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         
-        let isStudentExistAfterAdd = sut.isDuplicate(name: studentName)
+        let isStudentExistAfterAdd = sut.isExist(name: studentName)
         XCTAssertTrue(isStudentExistAfterAdd)
     }
     
     func test_학생을_삭제_했을_경우_학생들의_수가_1_감소한다() {
         let studentName = randomStudent()
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         
         let studentCountBeforeAdd = sut.numberOfStudent
-        sut.delete(name: studentName)
+        sut.deleteStudent(name: studentName)
         
         let studentCountAfterAdd = sut.numberOfStudent
         XCTAssertEqual(studentCountBeforeAdd - 1, studentCountAfterAdd)
@@ -68,12 +68,12 @@ final class UnitTestSutdentManager: XCTestCase {
     
     func test_없는_학생을_삭제_했을_경우_학생들의_수가_1_감소하지_않는다() {
         let studentName = randomStudent()
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         
-        sut.delete(name: studentName)
+        sut.deleteStudent(name: studentName)
         let studentCountBeforeAdd = sut.numberOfStudent
         
-        sut.delete(name: studentName)
+        sut.deleteStudent(name: studentName)
         let studentCountAfterAdd = sut.numberOfStudent
         
         XCTAssertEqual(studentCountBeforeAdd, studentCountAfterAdd)
@@ -81,14 +81,14 @@ final class UnitTestSutdentManager: XCTestCase {
     
     func test_학생을_삭제_할_경우_입력한_이름이_올바르게_삭제된다() {
         let studentName = randomStudent()        
-        sut.add(name: studentName)
+        sut.addStudent(name: studentName)
         
-        let isStudentExistBeforeAdd = sut.isDuplicate(name: studentName)
+        let isStudentExistBeforeAdd = sut.isExist(name: studentName)
         XCTAssertTrue(isStudentExistBeforeAdd)
         
-        sut.delete(name: studentName)
+        sut.deleteStudent(name: studentName)
         
-        let isStudentExistAfterAdd = sut.isDuplicate(name: studentName)
+        let isStudentExistAfterAdd = sut.isExist(name: studentName)
         XCTAssertFalse(isStudentExistAfterAdd)
     }
 }
