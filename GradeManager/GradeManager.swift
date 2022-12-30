@@ -144,14 +144,10 @@ class GradeManager {
             .values
             .map { $0.score / Double(student.scores.count) }
             .reduce(0.0, +)
-
         let roundedAverage = round(average * 100) / 100.0
+        
         print(template: .studentStatus(scores: student.scores))
         print(template: .studentAverageScore(roundedAverage.description))
-    }
-    
-    private func isValid(studentName: String) -> Bool {
-        return !studentName.isEmpty
     }
     
     private func scoreAddComponents(of scoreFormat: String)
@@ -186,11 +182,12 @@ class GradeManager {
         return (name, subject)
     }
     
+    private func isValid(studentName: String) -> Bool {
+        return !studentName.isEmpty
+    }
+    
     private func isExisting(name: String) -> Bool {
-        guard let _ = self.students[name] else {
-            return false
-        }
-        return true
+        return self.students[name] != nil
     }
     
     private func receiveInput(message: MessageTemplate) -> String? {
