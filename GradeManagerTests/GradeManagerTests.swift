@@ -86,4 +86,80 @@ final class GradeManagerTests: XCTestCase {
         let result = sut.students.count
         XCTAssertEqual(result, currentStudentCount)
     }
+    
+    func test_성적_추가_시_학생의_성적표_목록_수_증가() {
+        //given
+        sut.addStudent(of: "Forest")
+        guard let currentSubjectCount = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        
+        //when
+        let scoreFormat = "Forest Python A+"
+        sut.addScore(format: scoreFormat)
+        
+        //then
+        guard let result = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        XCTAssertEqual(result, currentSubjectCount + 1)
+    }
+    
+    func test_잘못된_성적_추가_시_학생의_성적표_목록_수_유지() {
+        //given
+        sut.addStudent(of: "Forest")
+        guard let currentSubjectCount = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        
+        //when
+        let scoreFormat = "i have no idea"
+        sut.addScore(format: scoreFormat)
+        
+        //then
+        guard let result = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        XCTAssertEqual(result, currentSubjectCount)
+    }
+    
+    func test_성적_삭제_시_학생의_성적표_목록_수_감소() {
+        //given
+        sut.addStudent(of: "Forest")
+        sut.addScore(format: "Forest Swift A+")
+        sut.addScore(format: "Forest Python B+")
+        guard let currentSubjectCount = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        
+        //when
+        let scoreFormat = "Forest Python"
+        sut.deleteScore(format: scoreFormat)
+        
+        //then
+        guard let result = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        XCTAssertEqual(result, currentSubjectCount - 1)
+    }
+    
+    func test_잘못된_과목_삭제_시_학생의_성적표_목록_수_유지() {
+        //given
+        sut.addStudent(of: "Forest")
+        sut.addScore(format: "Forest Swift A+")
+        sut.addScore(format: "Forest Python B+")
+        guard let currentSubjectCount = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        
+        //when
+        let scoreFormat = "Forest C++"
+        sut.deleteScore(format: scoreFormat)
+        
+        //then
+        guard let result = sut.students["Forest"]?.scores.count else {
+            return XCTFail("테스트 실패")
+        }
+        XCTAssertEqual(result, currentSubjectCount)
+    }
 }

@@ -16,28 +16,30 @@ class GradeManager {
     
     func run() {
     menuLoop: while let input = self.receiveInput(message: .selectMenu) {
-            let menu = self.menu(command: input)
-            switch menu {
-            case .addStudent:
-                let name = self.receiveInput(message: .inputStudent)
-                self.addStudent(of: name)
-            case .deleteStudent:
-                let name = self.receiveInput(message: .deleteStudent)
-                self.deleteStudent(of: name)
-            case .addScore:
-                break
-            case .deleteScore:
-                break
-            case .fetchScore:
-                break
-            case .exitMenu:
-                print(template: .exitProgram)
-                break menuLoop
-            case .error:
-                print(template: .wrongMenu)
-            }
+        let menu = self.menu(command: input)
+        switch menu {
+        case .addStudent:
+            let name = self.receiveInput(message: .inputStudent)
+            self.addStudent(of: name)
+        case .deleteStudent:
+            let name = self.receiveInput(message: .deleteStudent)
+            self.deleteStudent(of: name)
+        case .addScore:
+            let scoreFormat = self.receiveInput(message: .inputScore)
+            self.addScore(format: scoreFormat)
+        case .deleteScore:
+            let scoreFormat = self.receiveInput(message: .deleteScore)
+            self.deleteScore(format: scoreFormat)
+        case .fetchScore:
+            let name = self.receiveInput(message: .queryStudentScores)
+            self.queryStudentScores(of: name)
+        case .exitMenu:
+            print(template: .exitProgram)
+            break menuLoop
+        case .error:
+            print(template: .wrongMenu)
         }
-        
+    }
     }
     
     func addStudent(of name: String?) {
@@ -46,7 +48,7 @@ class GradeManager {
         }
         
         if !self.isValid(studentName: name) {
-            print(template: .invalidStudentName)
+            print(template: .invalidInput)
             return
         }
         
@@ -65,7 +67,7 @@ class GradeManager {
         }
         
         if !self.isValid(studentName: name) {
-            print(template: .invalidStudentName)
+            print(template: .invalidInput)
             return
         }
         
@@ -77,15 +79,115 @@ class GradeManager {
         print(template: .completeDeleteStudent(name: name))
     }
     
+    func addScore(format scoreFormat: String?) {
+        guard let scoreFormat,
+              let (name, subject, grade) = parseAddScoreFormat(scoreFormat)
+        else {
+            print(template: .invalidInput)
+            return
+        }
+        
+        guard var student = students[name] else {
+            print(template: .notExistStudent(name: name))
+            return
+        }
+        
+        student.addScore(subject: subject, grade: grade)
+        self.students[name] = student
+        print(template: .completeAddScore(name: name, subject: subject, grade: grade))
+    }
+    
+    func deleteScore(format scoreFormat: String?) {
+        guard let scoreFormat,
+              let (name, subject) = parseDeleteScoreFormat(scoreFormat)
+        else {
+            print(template: .invalidInput)
+            return
+        }
+        
+        guard var student = students[name] else {
+            print(template: .notExistStudent(name: name))
+            return
+        }
+        
+        guard student.scores[subject] != nil else {
+            print(template: .notFoundSubject)
+            return
+        }
+        
+        student.deleteScore(subject: subject)
+        self.students[name] = student
+        print(template: .completeDeleteScore(name: name, subject: subject))
+    }
+    
+    func queryStudentScores(of name: String?) {
+        guard let name else {
+            return
+        }
+        
+        if !self.isValid(studentName: name) {
+            print(template: .invalidInput)
+            return
+        }
+        
+        guard let student = students[name] else {
+            print(template: .notExistStudent(name: name))
+            return
+        }
+        
+        if student.scores.count == 0 {
+            print(template: .emptyScores)
+            return
+        }
+        
+        let average = student.scores
+            .values
+            .map { $0.score / Double(student.scores.count) }
+            .reduce(0.0, +)
+        let roundedAverage = round(average * 100) / 100.0
+        
+        print(template: .studentStatus(scores: student.scores))
+        print(template: .studentAverageScore(roundedAverage.description))
+    }
+    
+    private func parseAddScoreFormat(_ scoreFormat: String)
+    -> (name: String, subject: String, grade: Grade)? {
+        let scoreFormatArray = scoreFormat.components(separatedBy: " ")
+        
+        if scoreFormatArray.count != 3 {
+            return nil
+        }
+        
+        guard let grade = Grade(rawValue: scoreFormatArray[2]) else {
+            return nil
+        }
+        
+        let name = scoreFormatArray[0]
+        let subject = scoreFormatArray[1]
+        
+        return (name, subject, grade)
+    }
+    
+    private func parseDeleteScoreFormat(_ scoreFormat: String)
+    -> (name: String, subject: String)? {
+        let scoreFormatArray = scoreFormat.components(separatedBy: " ")
+        
+        if scoreFormatArray.count != 2 {
+            return nil
+        }
+        
+        let name = scoreFormatArray[0]
+        let subject = scoreFormatArray[1]
+        
+        return (name, subject)
+    }
+    
     private func isValid(studentName: String) -> Bool {
         return !studentName.isEmpty
     }
     
     private func isExisting(name: String) -> Bool {
-        guard let _ = self.students[name] else {
-            return false
-        }
-        return true
+        return self.students[name] != nil
     }
     
     private func receiveInput(message: MessageTemplate) -> String? {
