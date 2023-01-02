@@ -81,7 +81,7 @@ class GradeManager {
     
     func addScore(format scoreFormat: String?) {
         guard let scoreFormat,
-              let (name, subject, grade) = scoreAddComponents(of: scoreFormat)
+              let (name, subject, grade) = parseAddScoreFormat(scoreFormat)
         else {
             print(template: .invalidInput)
             return
@@ -99,7 +99,7 @@ class GradeManager {
     
     func deleteScore(format scoreFormat: String?) {
         guard let scoreFormat,
-              let (name, subject) = scoreDeleteComponents(of: scoreFormat)
+              let (name, subject) = parseDeleteScoreFormat(scoreFormat)
         else {
             print(template: .invalidInput)
             return
@@ -150,7 +150,7 @@ class GradeManager {
         print(template: .studentAverageScore(roundedAverage.description))
     }
     
-    private func scoreAddComponents(of scoreFormat: String)
+    private func parseAddScoreFormat(_ scoreFormat: String)
     -> (name: String, subject: String, grade: Grade)? {
         let scoreFormatArray = scoreFormat.components(separatedBy: " ")
         
@@ -168,7 +168,7 @@ class GradeManager {
         return (name, subject, grade)
     }
     
-    private func scoreDeleteComponents(of scoreFormat: String)
+    private func parseDeleteScoreFormat(_ scoreFormat: String)
     -> (name: String, subject: String)? {
         let scoreFormatArray = scoreFormat.components(separatedBy: " ")
         
